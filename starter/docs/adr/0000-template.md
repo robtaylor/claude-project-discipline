@@ -12,6 +12,8 @@ When scope expands, amend the Status line in place:
 Add an inline Amendment section near the top — see https://robtaylor.github.io/claude-project-discipline/adr.html
 -->
 
+**TL;DR.** In the context of <use case>, facing <concern>, we chose <option> to achieve <quality>, accepting <downside>.
+
 ## Context
 
 What was the situation? What constraints forced a decision? Be concrete — name the systems, the data formats, the friction. A reader six months from now should be able to reconstruct the world this decision was made in.
@@ -23,6 +25,14 @@ What we chose, with enough specificity to act on. Numbered sub-points if multipl
 1. <Commitment 1>
 2. <Commitment 2>
 3. <Commitment 3>
+
+## Alternatives considered
+
+The options we looked at and rejected, with the reason for each. Future readers should not have to re-litigate options that were already weighed and dismissed.
+
+- **<Option A>** — rejected because <specific reason tied to this project's constraints, not generic preference>.
+- **<Option B>** — rejected because <…>.
+- **<Do nothing / defer>** — rejected because <…>.
 
 ## Consequences
 

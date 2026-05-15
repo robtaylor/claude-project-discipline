@@ -28,6 +28,9 @@ Numbered (`0001-...md`, `0002-...md`), structured as:
 
 **Status:** Accepted (YYYY-MM-DD).
 
+**TL;DR.** In the context of <use case>, facing <concern>, we chose
+<option> to achieve <quality>, accepting <downside>.
+
 ## Context
 
 What was the situation? What constraints forced a decision?
@@ -37,6 +40,13 @@ Be concrete — name the systems, the data formats, the friction.
 
 What we chose, with enough specificity to act on.
 Numbered sub-points if multiple commitments.
+
+## Alternatives considered
+
+The options we looked at and rejected, with the reason for each.
+Tie each reason to this project's constraints, not generic preference.
+Future readers should not have to re-litigate options that were
+already weighed and dismissed.
 
 ## Consequences
 
@@ -52,6 +62,14 @@ decision should be revisited, and how to revisit it cheaply.
 
 Cross-references to related files, design docs, related ADRs.
 ```
+
+The **TL;DR** is a single-sentence summary in the (WH)Y form — *"in the context of X, facing Y, we chose Z to achieve Q, accepting D"*. It forces the author to name the trade-off out loud and gives skim-readers the shape of the decision before they commit to the prose.
+
+The **Alternatives considered** section is the most commonly skipped one and the one future readers most often need. Without it, the next person to hit the same fork in the road has to rediscover that Option B was already tried, or assume it wasn't, and re-propose it.
+
+### Prefer durable abstractions
+
+When the decision is meant to last, prefer platform-neutral patterns over framework-of-the-month. If the choice is tightly coupled to a tool or library that may be replaced in 12–18 months, say so explicitly in **Consequences** and add a **Walk-back option** for the day the dependency goes away. This isn't a ban on adopting new tools — it's a requirement to be honest about which decisions are load-bearing for the long term and which are situational.
 
 ## Status lifecycle
 
