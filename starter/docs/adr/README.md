@@ -35,6 +35,8 @@ When scope expands, amend in place rather than rewriting:
 
 When superseded, update Status on the old ADR and add a new ADR that references it. Never delete the old one.
 
+**Status must match the code.** A Status line is a claim about the codebase — verify it against the implementation before setting it; don't trust the previous status or that a feature "shipped". When a design is ratified but only partly built, mark it `Accepted (partial)` and add an `## Implementation status` section splitting *implemented* (with file refs) from *deferred* (with the gap + a tracking issue). See [the ADR chapter](https://robtaylor.github.io/claude-project-discipline/adr.html#status-must-match-the-code) for the full convention.
+
 ## Index
 
 | ADR  | Title | Status |

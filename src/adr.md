@@ -77,6 +77,7 @@ ADRs go through these states:
 
 - **Proposed** — written, under review.
 - **Accepted (YYYY-MM-DD)** — agreed upon. The date matters.
+- **Accepted (partial) (YYYY-MM-DD)** — ratified but only some of it is built. Carries an `## Implementation status` section (see [Status must match the code](#status-must-match-the-code)).
 - **Superseded by ADR NNNN (YYYY-MM-DD)** — replaced. The old ADR stays in place; the new one references it.
 - **Withdrawn (YYYY-MM-DD)** — abandoned without replacement (rare).
 
@@ -100,6 +101,32 @@ amendment, this amendment wins.
 ```
 
 This pattern preserves the historical reasoning while making the current bright lines easy to find.
+
+## Status must match the code
+
+A `Status:` line is a **claim about the codebase**, not a statement of intent. Before you set or change it, **verify the claim against the implementation** — read the code; don't trust the previous status or the fact that a feature "shipped". The same applies to any present-tense claim *inside* the ADR ("X feeds Y", "the kernel does Z"): it's verifiable, so verify it. This extends past ADRs to user-facing docs and `--help`/CLI text — a sentence describing how the tool behaves is a checkable claim, so check it before writing it.
+
+When a design is **ratified but only partly built**, don't inflate it to a clean `Accepted` and don't leave it languishing at `Proposed`. Mark it **`Accepted (partial)`** and add an `## Implementation status` section that splits *implemented* (with file references) from *deferred* (with the specific gap):
+
+```markdown
+## Implementation status
+
+**Implemented:**
+
+| Part | Where |
+| ---- | ----- |
+| Run-parameters file + per-domain seeded PRNG | `src/sim/run_params.rs` |
+
+**Deferred (issue #92):**
+
+| Part | § | Gap |
+| ---- | -- | --- |
+| Setup/hold integration | §5 | jitter shifts only the VCD timestamp, never the arrival offsets the checker reads |
+```
+
+**Deferred work gets a home:** a plan under `docs/plans/` and a tracking issue, cross-linked from the status section, so the unbuilt half isn't lost. Closing the issue means the `Deferred` table is empty and the status moves to a plain `Accepted`.
+
+Why this matters: it keeps the ADR trustworthy. A reader can rely on `Accepted` meaning "in effect", and `Accepted (partial)` tells them exactly which parts are real. The failure mode this prevents is a design doc that reads as shipped but is ~40% built — the next contributor takes it at face value and builds on vapour.
 
 ## Numbering and the index
 
