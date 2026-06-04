@@ -50,6 +50,24 @@ Write a handoff at the end of any session that:
 
 If the session ended at a clean stopping point (everything merged, all decisions documented in ADRs/plans, nothing surprising), don't write a handoff. The plan doc already says what's next.
 
+## Before you hand off: sweep for undocumented decisions
+
+A handoff is written at the moment your session context is richest and about to evaporate. That makes it the right checkpoint for one deliberate question:
+
+> **Did I make any architectural decision this session that isn't yet captured in an ADR?**
+
+Run the sweep *before* writing the handoff, not after. Walk the session's diffs and discussion for choices that pass the ADR test — *"if someone asked 'why is it like this?' six months from now, would the answer be in the code, the commit, or an ADR?"* For each one whose answer is "an ADR":
+
+- **No ADR fits** → write a new one now, while the rationale and the alternatives you weighed are still in working memory.
+- **An existing ADR covers the area but its scope grew** → amend it in place (Status-line note plus an inline `## Amendment` block).
+
+Only *then* write the handoff. This keeps the decision out of the handoff's "Critical context" — where it would be lost on fold-and-delete — and puts it in its permanent home at the moment you can write it best.
+
+Two failure modes this closes:
+
+1. **Decisions captured nowhere.** Without the sweep, a choice made mid-session lives only in the chat transcript and the diff. The transcript is gone next session; the diff shows *what* changed, never *why this and not that*.
+2. **Decisions smuggled into the handoff.** The shortcut is to jot "we went with X because Y" into the handoff and move on — but the handoff is deleted at resolution, and if fold-and-delete misses that paragraph the rationale dies with the file. Writing the ADR up front means there's nothing to migrate later.
+
 ## Resolution: fold, then delete
 
 The two-location split is deliberate: handoffs *live* at `docs/handoffs/<topic>-handoff.md` while in flight; their *content* migrates into the persistent docs (`docs/adr/`, `docs/plans/`, design docs under `docs/`) at resolution. The handoff file then gets removed; nothing about the work is lost because everything load-bearing has a permanent home elsewhere.

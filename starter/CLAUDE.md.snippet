@@ -49,11 +49,19 @@ proceeding:
 
 ### Handoff write/read protocol
 
-**At session end (work in progress, partial state):** write a handoff
-at `docs/handoffs/<topic>-handoff.md` using the template at
-`docs/handoffs/_template.md`. Goal, next-up, done-this-session,
-open-follow-ups, critical-context, verification-command. Skip if the
-session ended at a clean stopping point.
+**At session end (work in progress, partial state):**
+
+1. **ADR sweep first.** Before writing the handoff, scan this session's
+   diffs and discussion for any architectural decision not yet captured
+   in an ADR. For each, write a new ADR — or amend an existing one in
+   place — *now*, while the rationale is fresh. Don't park "we chose X
+   over Y because Z" in the handoff; it's lost when the handoff is
+   fold-and-deleted.
+2. **Then write the handoff** at `docs/handoffs/<topic>-handoff.md`
+   using the template at `docs/handoffs/_template.md`. Goal, next-up,
+   done-this-session, open-follow-ups, critical-context,
+   verification-command. Skip if the session ended at a clean stopping
+   point.
 
 **At session start (resuming work):** read the single handoff under
 `docs/handoffs/`. Run its verification command first to confirm
