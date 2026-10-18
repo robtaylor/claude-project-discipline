@@ -2,12 +2,13 @@
 
 This is a small, opinionated convention for how a software project keeps track of:
 
+- **What** the code does today, area by area
 - **Why** non-obvious choices were made
 - **What's next** and in what order
 - **What's been tried** that didn't pan out
 - **What's in flight right now** that someone else (or future-you) needs to pick up
 
-Four document kinds, four homes, one inviolable rule: **every load-bearing piece of information has exactly one canonical home, and only one of the four — the handoff — gets deleted.**
+Five document kinds, five homes, one inviolable rule: **every load-bearing piece of information has exactly one canonical home, and only the handoff gets deleted.** Finished plans and superseded decisions move to an `archive/` directory. Nothing else leaves the repo.
 
 ## Who this is for
 
@@ -23,10 +24,11 @@ Four document kinds, four homes, one inviolable rule: **every load-bearing piece
 
 ## How to read this book
 
-1. Read [Overview: four memory horizons](overview.md) first — it sketches the whole shape in one page.
-2. Read [Handoff documents](handoffs.md) — this is the most distinctive part of the discipline and the most easily abused without it.
-3. Skim the per-kind chapters ([ADRs](adr.md), [plans](plans.md), [spikes](spikes.md)) as you need them.
-4. Use [Adopting this in a new project](adopting.md) as the actionable checklist.
+1. Read [Overview: five kinds of document](overview.md) first. It sketches the whole shape in one page.
+2. Read [Architecture reference](architecture.md) and [Decision records](decisions.md) together. The split between *what the code does now* and *why it got that way* is the spine of the discipline.
+3. Read [Handoff documents](handoffs.md). It's the most distinctive part of the discipline and the most easily abused.
+4. Skim [spikes](spikes.md) and [plans](plans.md) as you need them.
+5. Use [Adopting this in a new project](adopting.md) as the actionable checklist.
 
 ## A note on style
 

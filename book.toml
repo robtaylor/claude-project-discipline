@@ -1,6 +1,6 @@
 [book]
 title = "Claude Project Discipline"
-description = "A lightweight four-document discipline (ADRs, plans, spikes, handoffs) for Claude Code projects"
+description = "A lightweight documentation discipline (architecture reference, decisions, spikes, plans, handoffs) for Claude Code projects"
 authors = ["Rob Taylor"]
 language = "en"
 src = "src"
@@ -11,6 +11,9 @@ edit-url-template = "https://github.com/robtaylor/claude-project-discipline/edit
 default-theme = "navy"
 preferred-dark-theme = "navy"
 site-url = "/claude-project-discipline/"
+
+[output.html.redirect]
+"/adr.html" = "decisions.html"
 
 [output.html.fold]
 enable = true

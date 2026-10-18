@@ -1,6 +1,6 @@
 # Release process
 
-A lightweight release process complements the four-document discipline. It doesn't *have* to live alongside Architecture Decision Records (ADRs), plans, and handoffs, but the same instincts apply: keep it short, version-control the steps, make the punch-list visible.
+A lightweight release process complements the rest of the discipline. It doesn't *have* to live alongside decisions, plans, and handoffs, but the same instincts apply: keep it short, version-control the steps, make the punch-list visible.
 
 ## Shape
 
@@ -39,7 +39,7 @@ There is no fixed cadence. Time-based releases force releases when there's nothi
 
 ## Versioning
 
-[SemVer](https://semver.org/), starting once the first numbered release ships. Pre-1.0 versions (`0.x.0`) carry the standard SemVer caveat: minor bumps may include breaking changes; specific stable contracts (a JSON schema, a binary format) are documented in their own ADRs and follow stricter rules.
+[SemVer](https://semver.org/), starting once the first numbered release ships. Pre-1.0 versions (`0.x.0`) carry the standard SemVer caveat: minor bumps may include breaking changes; specific stable contracts (a JSON schema, a binary format) are documented in their own decision records and follow stricter rules.
 
 A useful pattern is to declare the **stable contracts** explicitly:
 
@@ -48,9 +48,9 @@ Stable contracts (additive-only, breaking changes require a major
 bump and a deprecation window):
 
 - `--report` JSON schema — `src/report.rs::SCHEMA_VERSION`,
-  governed by ADR 0008.
+  governed by Decision 0008.
 - IR FlatBuffers schema — `crates/ir/schemas/ir.fbs`,
-  governed by ADR 0002.
+  governed by Decision 0002.
 ```
 
 Everything not listed is fair game to evolve.
@@ -71,13 +71,39 @@ Everything not listed is fair game to evolve.
 6. **Create a release** on the platform of your choice from the tag. Body = the CHANGELOG section for that version.
 ```
 
+## Release notes lead with what changed for the user
+
+Write the release notes in `[Unreleased]` as work lands, not at release time. Open them with a short **"What this means for you"** block before the technical `### Added` / `### Changed` sections:
+
+```markdown
+## [Unreleased]
+
+### What this means for you
+
+- You can now simulate designs with multiple clock domains.
+- Install is one command on macOS: `brew install org/tap/tool`.
+
+### Added
+- Multi-clock scheduler (`docs/architecture/simulation-engine.md`).
+```
+
+A few benefit-framed bullets say what a user can now *do*. The technical changelog then gives the detail. If your release notes come from the CHANGELOG (a release workflow that extracts the section for the tag), this block becomes the first thing a reader sees on the release page.
+
+## Release candidates: main *is* the candidate
+
+If you cut release candidates (`X.Y.Z-rc.N`) to validate install paths before a final release, **don't roll `main` to the final version before the candidate validates.** During the RC window, `main` stays at `X.Y.Z-rc.N` with the notes still under `[Unreleased]`. Each new RC is a `main` commit bumped to the next `-rc.N`, so `main` always matches the latest RC tag. Only the promote step rolls `[Unreleased]` into a dated `[X.Y.Z]` block and bumps to `X.Y.Z`.
+
+Rolling first leaves `main` advertising a version that has no release. The dated changelog entry and the manifest version both claim `X.Y.Z` shipped while only the RC tag exists. Tools that read `main`'s version to find a release tarball then fetch one that doesn't exist.
+
+A GitHub (or equivalent) **prerelease** makes a good staging tier for binary channels: it's never shown as "Latest", and an install-validation job can run the documented install commands against it before promotion.
+
 ## What does NOT need to change at release time
 
 Be explicit about this — it stops well-meaning maintainers from sweeping in changes that should land in their own PRs:
 
 - Vendored / submodule pins (unless deliberately bumping a vendored dep).
 - License files (unless re-licensing).
-- Long-lived design docs (unless the release changes the design they describe).
+- Area docs in `docs/architecture/` (unless the release changes the design they describe).
 
 ## Template
 

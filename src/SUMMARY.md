@@ -4,10 +4,11 @@
 
 # The discipline
 
-- [Overview: four memory horizons](overview.md)
-- [Architecture Decision Records (ADRs)](adr.md)
-- [Plan documents](plans.md)
+- [Overview: five kinds of document](overview.md)
+- [Architecture reference](architecture.md)
+- [Decision records](decisions.md)
 - [Spike documents](spikes.md)
+- [Plan documents](plans.md)
 - [Handoff documents](handoffs.md)
 - [Release process](release-process.md)
 
@@ -15,6 +16,7 @@
 
 - [Adopting this in a new project](adopting.md)
 - [Working with Claude Code](claude-code.md)
+- [Prose style](prose-style.md)
 - [FAQ](faq.md)
 
 # Reference

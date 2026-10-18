@@ -6,8 +6,8 @@
 
 <!--
 Reminder: a handoff is ephemeral. At resolution, every load-bearing piece
-below migrates into a docs/adr/, docs/plans/, docs/spikes/, or design-doc
-home, and this file is then `git rm`'d in the same commit as the migration.
+below migrates into a docs/architecture/ (area doc, decision, spike) or
+docs/plans/ home, and this file is then `git rm`'d in the same commit as the migration.
 
 See docs/handoff-discipline.md for the migration table.
 -->
@@ -35,7 +35,7 @@ See docs/handoff-discipline.md for the migration table.
 
 ### 1. <Item name> (<rough size>)
 
-<Concrete scope. Enough detail to start cold. Link to existing plan/ADR/design-doc sections rather than reproducing them.>
+<Concrete scope. Enough detail to start cold. Link to existing plan / decision / area-doc sections rather than reproducing them.>
 
 ### 2. <Item name> (<rough size>)
 
@@ -49,9 +49,9 @@ Be honest about what's truly load-bearing — anything obvious from
 
 ## References
 
-- [`<predecessor-handoff if any>`](<path>) — predecessor (rare; usually a smell)
-- [`<plan doc>`](<path>) — current workstream state
-- [`<ADR>`](<path>) — relevant decision
+- [`<predecessor-handoff if any>`](<topic>-handoff.md) — predecessor (rare; usually a smell)
+- [`<plan doc>`](../plans/<plan>.md) — current workstream state
+- [`<decision>`](../architecture/decisions/<NNNN-name>.md) — relevant decision
 
 ## Migration note
 
